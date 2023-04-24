@@ -38,7 +38,7 @@ export default defineConfig(({ command }) => {
       build: {
         lib: {
           entry: resolve(__dirname, 'src/index.ts'),
-          name: 'vue-tailwind-basecomponents',
+          name: 'baseComponents',
           fileName: (format) => `index.${format}.js`,
           typesDir: 'dist',
         },
