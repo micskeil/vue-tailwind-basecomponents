@@ -39,7 +39,7 @@ export default defineConfig(({ command }) => {
         lib: {
           entry: resolve(__dirname, 'src/index.ts'),
           name: 'vue-tailwind-basecomponents',
-          fileName: (format) => `vue-tailwind-basecomponents.${format}.js`,
+          fileName: (format) => `index.${format}.js`,
           typesDir: 'dist',
         },
         rollupOptions: {
