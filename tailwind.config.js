@@ -7,6 +7,9 @@ module.exports = {
    */
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      sans: ['Inter'],
+    },
     extend: {
       fontSize: {
         '2xs': '0.6rem',

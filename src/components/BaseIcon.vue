@@ -76,9 +76,10 @@
             return word.charAt(0).toUpperCase() + word.slice(1);
           })
           .join('')}`;
-    const path = mdiIcons[iconName];
+    let path = mdiIcons[iconName];
     if (!path) {
-      throw new Error(`Icon ${props.icon} not found`);
+      console.error(`Icon ${props.icon} not found.`);
+      path = mdiIcons['mdiAlert'];
     }
     return path;
   });

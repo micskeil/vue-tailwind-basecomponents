@@ -32,9 +32,11 @@ jobs:
       with:
         tag-prefix: "v"
         skip-tag: "true"
-        major-version-regex: "BREAKING CHANGE"
-        minor-version-regex: "feat:"
-        push-changes: "true"
+        major-wording: "BREAKING CHANGE"
+        minor-wording: "feat, feature"
+        patch-wording:  'patch,fixes,fix'
+        rc-wording: 'rc, alpha, beta, pre-release'
+        default: prerelease
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
