@@ -7,14 +7,14 @@
         placeholder="Your text goes here..."
         class="textarea__native"
         :class="{
-          'textbox__native--error': value.length > maxChars,
+          'textbox__native--error': hasError,
           focused: isFocused,
           error: hasError,
         }"
         @keyup.enter="handleSend"
         @focus="handleFocus"
         @blur="handleBlur"
-      />
+      ></textarea>
       <div class="details">
         <div v-if="maxChars" class="details__counter">
           <span
@@ -51,7 +51,7 @@
      */
     maxChars: {
       type: Number,
-      default: 0,
+      default: undefined,
     },
     /**
      * Whether or not the textarea should be in prompt mode.
@@ -74,7 +74,7 @@
     },
     set(newValue) {
       // If the new value is longer than the maxChars prop, we will not update the value.
-      if (newValue.length > props.maxChars) {
+      if (props.maxChars && newValue.length > props.maxChars) {
         return;
       }
       emit('update:modelValue', newValue);
@@ -89,7 +89,12 @@
     isFocused.value = false;
   }
 
-  const hasError = computed(() => value.value.length > props.maxChars);
+  const hasError = computed((): boolean => {
+    if (!props.maxChars) {
+      return false;
+    }
+    return value.value.length > props.maxChars;
+  });
 
   /**
    * Handles the send event triggered by a KeyboardEvent or button click.
@@ -106,7 +111,7 @@
     }
     event.preventDefault();
     event.stopPropagation();
-    if (value.value.length < 1 || value.value.length > props.maxChars) {
+    if (value.value.length < 1 || (props.maxChars && value.value.length > props.maxChars)) {
       return;
     }
     emit('send', value.value);
@@ -114,31 +119,34 @@
 </script>
 
 <style lang="postcss" scoped>
-  .textarea {
-    @apply relative flex h-full flex-1 flex-col;
+  .textarea-container {
+    @apply flex;
+    .textarea {
+      @apply relative flex h-full flex-1 flex-col;
 
-    &__native {
-      @apply m-2 flex-1 resize-none overflow-hidden border-none
-        focus:!outline-none active:!border-none active:!outline-none;
-    }
-  }
-  .details {
-    @apply absolute bottom-0 mx-2 mb-2 flex items-center justify-start;
-
-    &__counter {
-      @apply flex items-center justify-center text-xs opacity-25;
-
-      &:has(.warning) {
-        @apply opacity-75;
-        span {
-          @apply font-bold text-yellow-600 opacity-100;
-        }
+      &__native {
+        @apply m-2 flex-1 resize-none overflow-hidden border-none
+          focus:!outline-none active:!border-none active:!outline-none;
       }
+    }
+    .details {
+      @apply absolute bottom-0 mx-2 mb-2 flex items-center justify-start;
 
-      &:has(.error) {
-        @apply opacity-100;
-        span {
-          @apply font-bold text-red-600 opacity-100;
+      &__counter {
+        @apply flex items-center justify-center text-xs opacity-25;
+
+        &:has(.warning) {
+          @apply opacity-75;
+          span {
+            @apply font-bold text-yellow-600 opacity-100;
+          }
+        }
+
+        &:has(.error) {
+          @apply opacity-100;
+          span {
+            @apply font-bold text-red-600 opacity-100;
+          }
         }
       }
     }

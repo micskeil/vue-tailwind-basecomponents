@@ -11,13 +11,13 @@
     :route="route ? route : null"
     :ext-link="extLink ? extLink : null"
     :type="isLink ? undefined : type"
-    :aria-label="label"
+    :aria-label="label || 'button'"
     tabindex="0"
     :disabled="disabled || loading ? true : undefined"
   >
     <div class="button--loading">
       <slot v-if="loading" name="loading" class="button--loading">
-        <BaseIcon icon="loading" size="sm" />
+        <BaseIcon icon="loading" />
       </slot>
     </div>
     <div
@@ -27,7 +27,10 @@
       }"
     >
       <slot name="prepend" class="button__prepend"></slot>
-      <span class="button__label">{{ label }}</span>
+      <span v-if="icon" class="button__icon">
+        <BaseIcon :icon="icon" />
+      </span>
+      <span v-else class="button__label">{{ label }}</span>
       <slot name="append" class="button__append"></slot>
     </div>
   </button>
@@ -51,6 +54,13 @@
     label: {
       type: String,
       required: true,
+    },
+    /**
+     * The icon of the button. If set, the label will be replaced with the icon.
+     */
+    icon: {
+      type: String,
+      default: undefined,
     },
     /**
      * The type of the button.
@@ -128,6 +138,10 @@
     }
 
     &__label {
+      @apply mx-auto pb-[2px] leading-4 text-white;
+    }
+
+    &__icon {
       @apply mx-auto pb-[2px] leading-4 text-white;
     }
 

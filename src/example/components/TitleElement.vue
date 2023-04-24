@@ -2,7 +2,9 @@
   <div class="title">
     <component :is="component" class="title__text">
       <a :href="`#${id}`" class="title__anchor">#</a>
-      <slot></slot>
+      <div class="title__text">
+        <slot></slot>
+      </div>
     </component>
   </div>
 </template>
@@ -31,6 +33,10 @@
     &__anchor {
       @apply absolute -left-0 -translate-x-full pr-2 text-primary opacity-0
         transition-opacity duration-300;
+    }
+
+    &__text {
+      @apply cursor-default;
     }
 
     &:hover {
