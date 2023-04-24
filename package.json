@@ -1,6 +1,6 @@
 {
   "name": "vue-tailwind-basecomponents",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.2",
   "scripts": {
     "dev": "vite dev",
     "build": "run-p type-check build-only",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@mdi/js": "^7.2.96",
+    "vite-plugin-dts": "^2.3.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
