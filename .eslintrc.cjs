@@ -1,11 +1,11 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -14,7 +14,7 @@ module.exports = {
     '@vue/typescript/recommended',
     '@vue/prettier',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
+    '@vue/eslint-config-prettier',
   ],
   parser: 'vue-eslint-parser',
   rules: {
@@ -24,22 +24,22 @@ module.exports = {
       {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_'
-      }
+        caughtErrorsIgnorePattern: '^_',
+      },
     ],
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['error', 'default']
-      }
+        ignores: ['error', 'default'],
+      },
     ],
     curly: 'error',
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto'
-      }
-    ]
+        endOfLine: 'auto',
+      },
+    ],
   },
   overrides: [
     {
@@ -49,21 +49,21 @@ module.exports = {
         'vue/multi-word-component-names': [
           'error',
           {
-            ignores: ['error', 'default']
-          }
-        ]
-      }
-    }
+            ignores: ['error', 'default'],
+          },
+        ],
+      },
+    },
   ],
   settings: {
     // Fix eslint "import/named" when importing interfaces from modules.
     'import/resolver': {
       typescript: {
-        alwaysTryTypes: true
-      }
-    }
+        alwaysTryTypes: true,
+      },
+    },
   },
   parserOptions: {
-    ecmaVersion: 'latest'
-  }
-}
+    ecmaVersion: 'latest',
+  },
+};
