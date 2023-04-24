@@ -23,7 +23,13 @@ export default defineConfig(({ command }) => {
   } else {
     // Build configuration
     return {
-      plugins: [vue(), dts()],
+      plugins: [
+        vue(),
+        dts({
+          outputDir: 'dist',
+          insertTypesEntry: true,
+        }),
+      ],
       resolve: {
         alias: {
           '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -33,8 +39,7 @@ export default defineConfig(({ command }) => {
         lib: {
           entry: resolve(__dirname, 'src/index.ts'),
           name: 'vue-tailwind-basecomponents',
-          formats: ['es'],
-          fileName: 'vue-tailwind-basecomponents',
+          fileName: 'index',
         },
         rollupOptions: {
           external: ['vue'],
@@ -45,6 +50,7 @@ export default defineConfig(({ command }) => {
           },
         },
         declarations: true,
+        outDir: 'dist',
       },
     };
   }
