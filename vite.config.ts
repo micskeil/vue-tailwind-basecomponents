@@ -30,8 +30,8 @@ export default defineConfig(({ command }) => {
       build: {
         lib: {
           entry: 'src/index.ts',
-          name: 'MyVueUILibrary',
-          fileName: (format) => `my-vue-ui-library.${format}.js`,
+          name: 'vue-tailwind-basecomponents',
+          fileName: (format) => `vue-tailwind-basecomponents.${format}.js`,
         },
         rollupOptions: {
           external: ['vue'],
@@ -41,6 +41,7 @@ export default defineConfig(({ command }) => {
             },
           },
         },
+        declarations: true,
       },
     };
   }
