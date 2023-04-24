@@ -1,0 +1,21 @@
+# Editor configuration, see http://editorconfig.org
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+space_after_anon_function = true
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[*.env]
+insert_final_newline = false
+
+[*.{js,ts,vue}]
+quote_type = single

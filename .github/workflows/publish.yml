@@ -1,0 +1,44 @@
+name: Publish to NPM
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+jobs:
+  build-and-publish:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+        cache: npm
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build library
+      run: npm run build
+
+    - name: Bump version
+      id: bump-version
+      uses: phips28/gh-action-bump-version@master
+      with:
+        tag-prefix: "v"
+        skip-tag: "true"
+        major-version-regex: "BREAKING CHANGE"
+        minor-version-regex: "feat:"
+        push-changes: "true"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish to NPM
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
