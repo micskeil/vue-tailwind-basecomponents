@@ -7,7 +7,7 @@
         to limit the number of characters entered.
       </ParagraphElement>
     </div>
-    <BaseTextarea v-model="value" :max-chars="maxChars" height="120px" :class="[containerClasses]" />
+    <BaseTextarea v-model="value" :max-chars="maxChars" :class="[containerClasses]" />
 
     <BaseButton label="Send" :loading="loading" />
   </MainLayout>

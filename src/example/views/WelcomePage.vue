@@ -15,14 +15,14 @@
         you can tailor the appearance of your application to your specific needs and preferences, making it stand out
         from the crowd.
       </ParagraphElement>
-      <!-- <ParagraphElement>
+      <ParagraphElement>
         To get started, simply install the library via NPM and import the components you want to use in your Vue 3
         application:
       </ParagraphElement>
       <ParagraphElement>
-        <pre><code class="language-javascript">npm install my-vue3-library</code></pre>
-        <pre><code class="language-javascript">import { Button, Card, Icon } from 'my-vue3-library'</code></pre>
-      </ParagraphElement> -->
+        <pre><code class="language-javascript">npm i vue-tailwind-basecomponents</code></pre>
+        <pre><code class="language-javascript">import BaseComponents from 'my-vue3-library'</code></pre>
+      </ParagraphElement>
     </div>
   </MainLayout>
 </template>

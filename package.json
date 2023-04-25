@@ -1,15 +1,27 @@
 {
   "name": "vue-tailwind-basecomponents",
-  "version": "0.0.0-alpha.10",
-  "files": ["dist"],
+  "version": "0.0.0",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "README.md"
+  ],
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.cjs"
+    },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "scripts": {
@@ -17,7 +29,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
+    "build-only": "vite build --watch",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
