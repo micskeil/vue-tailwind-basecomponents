@@ -68,13 +68,14 @@
     send: (v) => typeof v === 'string',
   });
 
+
   const value = computed({
     get() {
       return props.modelValue;
     },
     set(newValue) {
       // If the new value is longer than the maxChars prop, we will not update the value.
-      if (props.maxChars && newValue.length > props.maxChars) {
+      if (props.maxChars && (newValue.length > props.maxChars)) {
         return;
       }
       emit('update:modelValue', newValue);

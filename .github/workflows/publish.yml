@@ -30,13 +30,6 @@ jobs:
       id: bump-version
       uses: phips28/gh-action-bump-version@master
       with:
-        tag-prefix: "v"
-        skip-tag: "true"
-        major-wording: "BREAKING CHANGE"
-        minor-wording: "feat, feature"
-        patch-wording:  'patch,fixes,fix'
-        rc-wording: 'rc, alpha, beta, pre-release'
-        default: prerelease
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
