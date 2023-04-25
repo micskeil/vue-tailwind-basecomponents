@@ -9,6 +9,8 @@ jobs:
   build-and-publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - name: Check out repository
@@ -31,6 +33,10 @@ jobs:
       uses: phips28/gh-action-bump-version@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        major-wording: 'BREAKING CHANGE', 'major',
+        minor-wording: 'feat', 'minor',
+        rc-wording: 'pre-alpha', 'pre-beta', 'pre-rc'
 
     - name: Publish to NPM
       uses: JS-DevTools/npm-publish@v2
