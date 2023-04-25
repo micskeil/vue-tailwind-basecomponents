@@ -33,10 +33,6 @@ jobs:
       uses: phips28/gh-action-bump-version@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        major-wording: 'BREAKING CHANGE', 'major',
-        minor-wording: 'feat', 'minor',
-        rc-wording: 'pre-alpha', 'pre-beta', 'pre-rc'
 
     - name: Publish to NPM
       uses: JS-DevTools/npm-publish@v2
