@@ -4,24 +4,24 @@
       <img src="/assets/logo.png" alt="Vue 3 Tailwind (base)Components" width="250" class="mx-auto -translate-x-1/2"/>
       <TitleElement id="textarea" tag="h1">Vue 3 Tailwind (base)Components</TitleElement>
       <ParagraphElement>
-        This is a powerful collection of basic elements that can help
-        streamline your Vue 3 Tailwind projects. The library is designed to provide developers with easy-to-use
-        components that come with predefined CSS layouts, making it effortless to create beautiful web applications
-        without the hassle of coding everything from scratch.
+        Streamline your <b>Vue 3 Tailwind projects</b> with our powerful collection of basic elements.
+        Our easy-to-use components come with predefined CSS layouts,
+        so you can create beautiful web applications effortlessly.
       </ParagraphElement>
       <ParagraphElement>
-        One of the key features of our library is that it's highly customizable. While the components come with
-        predefined CSS layouts, you can easily personalize the designs with simple CSS modifications. This means that
-        you can tailor the appearance of your application to your specific needs and preferences, making it stand out
-        from the crowd.
+        Our library is highly customizable. Components have predefined layouts but can be personalized with simple CSS modifications. Tailor your application to your specific needs and preferences, making it unique.
       </ParagraphElement>
       <ParagraphElement>
-        To get started, simply install the library via NPM and import the components you want to use in your Vue 3
-        application:
+        To get started:
       </ParagraphElement>
       <ParagraphElement>
-        <pre><code class="language-javascript">npm i vue-tailwind-basecomponents</code></pre>
-        <pre><code class="language-javascript">import BaseComponents from 'my-vue3-library'</code></pre>
+        <BaseCode code="npm i vue-tailwind-basecomponents" language="bash"></BaseCode>
+      </ParagraphElement>
+      <ParagraphElement>
+        It's generally best to import directly from packages when using components, composables, and directives. This ensures use of the latest code version, reduces potential conflicts with other libraries, keeps code clean, and makes it easier to read.
+      </ParagraphElement>
+      <ParagraphElement>
+        <BaseCode code="import { ... } from 'vue-tailwind-basecomponents'"></BaseCode>
       </ParagraphElement>
     </div>
   </MainLayout>

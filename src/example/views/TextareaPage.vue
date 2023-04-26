@@ -8,8 +8,6 @@
       </ParagraphElement>
     </div>
     <BaseTextarea v-model="value" :max-chars="maxChars" :class="[containerClasses]" />
-
-    <BaseButton label="Send" :loading="loading" />
   </MainLayout>
 </template>
 

@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 const WelcomePage = (): Component => import('../views/WelcomePage.vue');
 const ButtonPage = (): Component => import('../views/ButtonPage.vue');
 const TextareaPage = (): Component => import('../views/TextareaPage.vue');
+const CodePage = (): Component => import('../views/CodePage.vue');
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: '/textarea',
     name: 'textarea',
     component: TextareaPage,
+  },
+  {
+    path: '/code',
+    name: 'code',
+    component: CodePage,
   },
   {
     path: '/:pathMatch(.*)*',
