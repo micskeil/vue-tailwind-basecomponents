@@ -12,11 +12,12 @@ app.component('MainLayout', MainLayout);
 app.component('ParagraphElement', ParagraphElement);
 app.component('TitleElement', TitleElement);
 
-const { BaseTextarea, BaseIcon, BaseButton } = BaseComponents;
+const { BaseTextarea, BaseIcon, BaseButton, BaseCode } = BaseComponents;
 
 app.component('BaseTextarea', BaseTextarea);
 app.component('BaseIcon', BaseIcon);
 app.component('BaseButton', BaseButton);
+app.component('BaseCode', BaseCode);
 
 app.use(router);
 

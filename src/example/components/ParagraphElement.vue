@@ -9,7 +9,7 @@
 
 <style lang="postcss" scoped>
 .paragraph {
-  @apply flex flex-col items-start justify-start mb-8 gap-8 leading-6;
+  @apply mb-8 gap-8 leading-6;
 }
 
 </style>
