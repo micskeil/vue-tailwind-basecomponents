@@ -44,8 +44,8 @@
   }
 
   .main-layout__header {
-    @apply sticky top-0 w-full z-10 flex h-[55px] flex-row items-center border-b-1
-      border-gray-200 bg-gray-50 px-8 text-base font-semibold shadow-xl;
+    @apply sticky top-0 w-full z-10 flex h-[55px] bg-white flex-row items-center border-b-1
+      border-gray-200 px-8 text-base font-semibold shadow-xl;
 
     .main-layout__title {
       @apply ml-8;
@@ -54,7 +54,7 @@
 
   .main-layout__sidebar {
     @apply flex w-64 flex-col items-start justify-start sticky h-[calc(100vh-55px)] top-[55px]
-      border-r border-gray-200 bg-gray-50 px-8 pt-8 shadow-xl;
+      border-r border-gray-200 bg-gray-100 px-8 pt-8 shadow-xl;
   }
 
   .main-layout__nav {
