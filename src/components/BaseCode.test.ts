@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils';
 import BaseCode from './BaseCode.vue';
-import { describe, it, expect, vi } from 'vitest'
 import BaseIcon from './BaseIcon.vue';
+import { mount } from '@vue/test-utils';
+import { describe, it, expect, vi } from 'vitest';
 
 // mock the clipboard API
 const clipboard = {
@@ -43,7 +43,9 @@ describe('CodeHighlighter', () => {
     const copyIcon = wrapper.findComponent({ name: 'BaseIcon' });
     await copyIcon.trigger('click');
 
-    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith('console.log("Hello World!");');
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      'console.log("Hello World!");'
+    );
     expect(wrapper.find('.copy__confirmation').exists()).toBe(true);
   });
 });

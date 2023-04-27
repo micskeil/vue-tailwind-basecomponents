@@ -1,15 +1,15 @@
 <template>
   <MainLayout>
-    <TitleElement id="button" tag="h1"> Button Component</TitleElement>
+    <TitleElement id="button" tag="h1"> Button Component </TitleElement>
 
     <ParagraphElement>
       <div class="buttons">
-        <BaseButton label="button 1" icon="frog"></BaseButton>
-        <BaseButton label="button 2"></BaseButton>
-        <BaseButton label="button 3"></BaseButton>
-        <BaseButton label="button 4"></BaseButton>
-        <BaseButton label="button 5"></BaseButton>
-        <BaseButton label="button 6"></BaseButton>
+        <BaseButton label="button 1" icon="frog" />
+        <BaseButton label="button 2" />
+        <BaseButton label="button 3" />
+        <BaseButton label="button 4" />
+        <BaseButton label="button 5" />
+        <BaseButton label="button 6" />
       </div>
     </ParagraphElement>
   </MainLayout>

@@ -26,12 +26,12 @@
         'button__content--loading': loading,
       }"
     >
-      <slot name="prepend" class="button__prepend"></slot>
+      <slot name="prepend" class="button__prepend" />
       <span v-if="icon" class="button__icon">
         <BaseIcon :icon="icon" />
       </span>
       <span v-else class="button__label">{{ label }}</span>
-      <slot name="append" class="button__append"></slot>
+      <slot name="append" class="button__append" />
     </div>
   </button>
 </template>

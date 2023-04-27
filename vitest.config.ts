@@ -1,8 +1,8 @@
 import viteConfig from './vite.config';
+import vue from '@vitejs/plugin-vue';
 import { fileURLToPath } from 'node:url';
 import { mergeConfig } from 'vite';
 import { configDefaults, defineConfig } from 'vitest/config';
-import vue from '@vitejs/plugin-vue';
 
 export default mergeConfig(
   viteConfig,

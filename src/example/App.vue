@@ -2,7 +2,10 @@
   <RouterView />
 </template>
 
-<style lang="postcss" >
+<script setup lang="ts">
+</script>
+
+<style lang="postcss">
 body {
   @apply m-0;
 }

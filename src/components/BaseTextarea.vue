@@ -14,7 +14,7 @@
         @keyup.enter="handleSend"
         @focus="handleFocus"
         @blur="handleBlur"
-      ></textarea>
+      />
       <div class="details">
         <div v-if="maxChars" class="details__counter">
           <span
@@ -68,14 +68,13 @@
     send: (v) => typeof v === 'string',
   });
 
-
   const value = computed({
     get() {
       return props.modelValue;
     },
     set(newValue) {
       // If the new value is longer than the maxChars prop, we will not update the value.
-      if (props.maxChars && (newValue.length > props.maxChars)) {
+      if (props.maxChars && newValue.length > props.maxChars) {
         return;
       }
       emit('update:modelValue', newValue);
@@ -112,7 +111,10 @@
     }
     event.preventDefault();
     event.stopPropagation();
-    if (value.value.length < 1 || (props.maxChars && value.value.length > props.maxChars)) {
+    if (
+      value.value.length < 1 ||
+      (props.maxChars && value.value.length > props.maxChars)
+    ) {
       return;
     }
     emit('send', value.value);

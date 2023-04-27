@@ -1,10 +1,10 @@
 <template>
   <MainLayout>
     <div>
-      <TitleElement id="textarea" tag="h1">Textarea</TitleElement>
+      <TitleElement id="textarea" tag="h1"> Textarea </TitleElement>
       <ParagraphElement>
-        The Textarea component is a custom text area input component that provides a character counter and the ability
-        to limit the number of characters entered.
+        The Textarea component is a custom text area input component that provides a
+        character counter and the ability to limit the number of characters entered.
       </ParagraphElement>
     </div>
     <BaseTextarea v-model="value" :max-chars="maxChars" :class="[containerClasses]" />

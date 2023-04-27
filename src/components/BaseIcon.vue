@@ -1,6 +1,17 @@
 <template>
-  <span :title="label" class="icon" role="img" :aria-label="label" :aria-labelledby="parentId">
-    <svg class="icon__native" viewBox="0 0 24 24" :width="width" :class="[`fill-${color}`, `icon-${icon}`]">
+  <span
+    :title="label"
+    class="icon"
+    role="img"
+    :aria-label="label"
+    :aria-labelledby="parentId"
+  >
+    <svg
+      class="icon__native"
+      viewBox="0 0 24 24"
+      :width="width"
+      :class="[`fill-${color}`, `icon-${icon}`]"
+    >
       <path :d="path" />
     </svg>
   </span>

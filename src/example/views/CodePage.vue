@@ -1,10 +1,9 @@
 <template>
   <MainLayout>
-    <TitleElement id="button" tag="h1"> Code Component</TitleElement>
+    <TitleElement id="button" tag="h1"> Code Component </TitleElement>
 
     <ParagraphElement>
-      <BaseCode :code="code" language="javascript"></BaseCode>
-
+      <BaseCode :code="code" language="javascript" />
     </ParagraphElement>
   </MainLayout>
 </template>
