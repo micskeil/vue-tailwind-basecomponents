@@ -3,7 +3,7 @@
     <component :is="component" class="title__text">
       <a :href="`#${id}`" class="title__anchor">#</a>
       <div class="title__text">
-        <slot></slot>
+        <slot />
       </div>
     </component>
   </div>

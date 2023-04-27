@@ -1,7 +1,7 @@
 import BaseButton from '@/components/BaseButton.vue';
+import BaseCode from '@/components/BaseCode.vue';
 import BaseIcon from '@/components/BaseIcon.vue';
 import BaseTextarea from '@/components/BaseTextarea.vue';
-import BaseCode from '@/components/BaseCode.vue';;
 
 const BaseComponents: {
   // explicit type for better type inference in build mode
@@ -13,7 +13,7 @@ const BaseComponents: {
   BaseTextarea,
   BaseIcon,
   BaseButton,
-  BaseCode
+  BaseCode,
 };
 
 export default BaseComponents;

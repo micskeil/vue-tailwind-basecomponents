@@ -7,52 +7,36 @@ module.exports = {
     browser: true,
     node: true,
   },
+  plugins: ['tailwindcss'],
   extends: [
-    'plugin:vue/vue3-essential',
-    'plugin:vue/vue3-recommended',
     'eslint:recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier',
+    '@vue/prettier',
+    'plugin:vue/vue3-recommended',
+    'plugin:tailwindcss/recommended',
+    'prettier',
   ],
   parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 'latest',
+  },
   rules: {
-    'vue/no-multiple-template-root': 'off',
+    'tailwindcss/no-custom-classname': 'off',
+    'prettier/prettier': ['error', {}],
     '@typescript-eslint/no-unused-vars': [
-      'warn', // or error
+      'error', // or warn
       {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
         caughtErrorsIgnorePattern: '^_',
       },
     ],
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['error', 'default'],
-      },
-    ],
-    curly: 'error',
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
   },
   overrides: [
     {
       files: ['**/*.ts', '**/*.vue'],
-      rules: {
-        '@typescript-eslint/no-explicit-any': 'off',
-        'vue/multi-word-component-names': [
-          'error',
-          {
-            ignores: ['error', 'default'],
-          },
-        ],
-      },
+      rules: {},
     },
   ],
   settings: {
@@ -62,8 +46,5 @@ module.exports = {
         alwaysTryTypes: true,
       },
     },
-  },
-  parserOptions: {
-    ecmaVersion: 'latest',
   },
 };

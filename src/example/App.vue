@@ -2,12 +2,16 @@
   <RouterView />
 </template>
 
-<style lang="postcss" >
-body {
-  @apply m-0;
-}
+<script setup lang="ts">
+  // ...
+</script>
 
-#app {
-  @apply  flex flex-col min-h-screen;
-}
+<style lang="postcss">
+  body {
+    @apply m-0;
+  }
+
+  #app {
+    @apply flex min-h-screen flex-col;
+  }
 </style>
