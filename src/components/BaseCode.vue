@@ -6,10 +6,10 @@
         <BaseIcon class="copy__icon" icon="content-copy" :size="16" @click="copyCode" />
       </div>
     </div>
-    <pre class="code"><code
-:class="`language-${language}`"
-                            v-html="html"
-    /></pre>
+    <pre class="code">
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <code :class="`language-${language}`" v-html="html" />
+    </pre>
     <div class="code-language">
       {{ language }}
     </div>
