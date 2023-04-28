@@ -58,7 +58,7 @@
     @apply relative overflow-hidden rounded-xl border-none bg-gray-800;
 
     .code {
-      @apply overflow-x-auto p-2 pb-4 pt-8 lg:p-4 lg:pb-8 lg:pt-10;
+      @apply flex w-full overflow-x-auto p-4 pb-4 pt-8;
     }
 
     .code-tools {
