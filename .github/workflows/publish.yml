@@ -27,12 +27,6 @@ jobs:
     - name: Build library
       run: npm run build
 
-    - name: Bump version
-      id: bump-version
-      uses: phips28/gh-action-bump-version@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Publish to NPM
       uses: JS-DevTools/npm-publish@v2
       with:
