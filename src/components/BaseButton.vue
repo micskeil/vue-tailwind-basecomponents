@@ -122,7 +122,7 @@
       transition-colors duration-300 ease-in-out;
 
     &:hover {
-      @apply bg-primary-800;
+      @apply opacity-95;
     }
 
     &:active {

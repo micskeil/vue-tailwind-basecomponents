@@ -55,7 +55,7 @@
   }
 
   .main-layout__header {
-    @apply sticky top-0 z-10 flex h-[55px] w-full flex-row items-center border-b-1 border-gray-200
+    @apply sticky top-0 z-10 flex h-[55px] w-full flex-row items-center 
       bg-white px-8 text-base font-semibold shadow-xl;
 
     .main-layout__title {

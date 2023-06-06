@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${elementType}-container`">
+  <div class="input-container" :class="`${elementType}-container`">
     <slot />
   </div>
 </template>
@@ -20,7 +20,7 @@
     }
 
     &:has(.focused) {
-      @apply border-primary-800;
+      @apply border-primary;
     }
   }
 </style>
