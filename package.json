@@ -1,6 +1,6 @@
 {
   "name": "vue-tailwind-basecomponents",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "files": [
     "dist/**/*",
     "src/**/*",
@@ -26,7 +26,8 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "run-p type-check build-only",
+    "build": "run-p delete-build type-check build-only",
+    "delete-build": "rimraf dist",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",

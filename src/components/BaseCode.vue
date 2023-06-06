@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
   import InputContainer from './InputContainer.vue';
-  import Prism from 'prismjs';
+  import * as Prism from 'prismjs';
   import 'prismjs/themes/prism-tomorrow.css';
   import { ref } from 'vue';
 

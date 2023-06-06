@@ -10,6 +10,6 @@
 
 <style lang="postcss" scoped>
   .paragraph {
-    @apply mb-8 gap-8 leading-6;
+    @apply mb-8 gap-8 indent-4 leading-6;
   }
 </style>

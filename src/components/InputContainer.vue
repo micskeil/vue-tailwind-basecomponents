@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :class="`${elementType}-container`">
+  <div :class="`${elementType}-container`">
     <slot />
   </div>
 </template>
@@ -13,7 +13,7 @@
 
 <style lang="postcss" scoped>
   .container {
-    @apply flex items-center justify-start border-2 border-primary bg-white;
+    @apply flex items-center justify-start border-2;
 
     &:has(.error) {
       @apply border-red-600;

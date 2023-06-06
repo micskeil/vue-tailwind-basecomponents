@@ -1,10 +1,11 @@
 <template>
-  <InputContainer element-type="input">
+  <InputContainer element-type="input" :class="{ 'full-width': block }">
     <div class="input">
       <div class="input__prepend">
         <slot name="prepend" />
       </div>
       <input
+        ref="inputRef"
         v-model="value"
         type="text"
         placeholder="Your text goes here..."
@@ -22,7 +23,7 @@
       </div>
     </div>
     <div v-if="!hideDetails" class="details">
-      <div v-for="message in messages" :key="message" class="details__message">
+      <div v-for="message in allMessages" :key="message" class="details__message">
         {{ message }}
       </div>
     </div>
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
   import InputContainer from './InputContainer.vue';
-  import { computed, ref } from 'vue';
+  import { computed, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
   type inputRule = (value: string) => boolean | string;
@@ -45,9 +46,22 @@
       type: String,
       required: true,
     },
+    /**
+     * The rules to validate the input.
+     * These are functions that return true if the input is valid,
+     * false or a string with the error message if the input is invalid.
+     */
     rules: {
       type: Array as PropType<inputRule[]>,
       default: () => [],
+    },
+    /**
+     * When to validate the input.
+     * @default blur
+     */
+    validateOn: {
+      type: String as PropType<'blur' | 'change'>,
+      default: 'blur',
     },
     /**
      * To hide the details section with v-if.
@@ -56,11 +70,33 @@
       type: Boolean,
       default: false,
     },
+    /**
+     * The messages to display in the details section.
+     */
     messages: {
       type: Array as PropType<string[]>,
       default: () => [],
     },
+    /**
+     * Whether the input should autofocus.
+     */
+    autofocus: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Whether the input should be full width, so block.
+     */
+    block: {
+      type: Boolean,
+      default: false,
+    },
   });
+
+  const inputRef = ref<HTMLInputElement | null>(null);
+
+  const isBlurHappened = ref(false);
+  const isChangeHappened = ref(false);
 
   const emit = defineEmits({ 'update:modelValue': (_v: string) => true });
 
@@ -68,23 +104,12 @@
     get: () => props.modelValue,
     set: (v) => {
       emit('update:modelValue', v);
+      isChangeHappened.value = true;
     },
   });
 
-  const hasError = computed((): boolean => {
-    if (props.rules.length === 0) {
-      return false;
-    }
-    props.rules.forEach((rule) => {
-      if (rule(value.value) !== true) {
-        return true;
-      }
-    });
-    return false;
-  });
-
-  const messages = computed((): Array<string> => {
-    const messages = [...props.messages] as Array<string>;
+  const errorMessages = computed((): Array<string> => {
+    const messages = [] as Array<string>;
     if (props.rules.length === 0) {
       return messages;
     }
@@ -97,13 +122,50 @@
     return messages;
   });
 
+  const allMessages = computed(() => [...props.messages, ...errorMessages.value]);
+
+  /**
+   * Reactive variable to check if the input has an error.
+   */
+  const hasError = computed(validate);
+
+  /**
+   * Exposed function to validate the input according to the rules prop.
+   */
+  function validate({ silent } = { silent: false }): boolean {
+    if (props.rules.length === 0) {
+      return true;
+    }
+    if (silent === false) {
+      props.validateOn === 'blur'
+        ? (isBlurHappened.value = true)
+        : (isChangeHappened.value = true);
+    }
+    return props.rules.every((rule) => rule(value.value) === true);
+  }
+  defineExpose({ validate });
+
   const isFocused = ref(false);
   const handleFocus = () => {
     isFocused.value = true;
   };
   const handleBlur = () => {
     isFocused.value = false;
+    isBlurHappened.value = true;
   };
+
+  /**
+   * Focus the input if props.autofocus is true.
+   */
+  watchEffect(() => {
+    if (props.autofocus) {
+      inputRef.value?.focus();
+    }
+  });
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+  .input {
+    @apply flex items-center;
+  }
+</style>
