@@ -2,15 +2,18 @@
   <InputContainer element-type="textarea">
     <div class="textarea">
       <textarea
+        ref="textareaRef"
         v-model="value"
-        resize="none"
         placeholder="Your text goes here..."
         class="textarea__native"
         :class="{
           'textbox__native--error': hasError,
           focused: isFocused,
           error: hasError,
+          'textbox__native--resizable': !noResize,
         }"
+        v-bind="$attrs"
+        spellcheck
         @keyup.enter="handleSend"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -34,7 +37,11 @@
 
 <script setup lang="ts">
   import InputContainer from './InputContainer.vue';
-  import { ref, computed } from 'vue';
+  import { ref, computed, watch, onMounted } from 'vue';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     /**
@@ -58,6 +65,14 @@
      * If true, the textarea will not emit the 'send' event when the user presses enter.
      */
     promptMode: {
+      type: Boolean,
+      default: false,
+    },
+    noResize: {
+      type: Boolean,
+      default: false,
+    },
+    autoGrow: {
       type: Boolean,
       default: false,
     },
@@ -104,6 +119,10 @@
    */
 
   const handleSend = (event: KeyboardEvent) => {
+    // If the user is not in prompt mode, we will not send the message.
+    if (props.promptMode === false) {
+      return;
+    }
     // If the user is pressing shift + enter, we will not send the message.
     // This is to allow the user to create a new line.
     if (event.shiftKey || event.key !== 'Enter') {
@@ -119,21 +138,39 @@
     }
     emit('send', value.value);
   };
+
+  const textareaRef = ref<HTMLTextAreaElement | null>(null);
+  // Change text area height when typing
+  onMounted(() => {
+    if (props.autoGrow) {
+      watch(value, () => {
+        console.log('value changed');
+        textareaRef.value?.style.setProperty(
+          'height',
+          textareaRef.value?.scrollHeight + 'px'
+        );
+      });
+    }
+  });
 </script>
 
 <style lang="postcss" scoped>
   .textarea-container {
-    @apply flex;
+    @apply flex p-2 md:p-4;
     .textarea {
       @apply relative flex h-full flex-1 flex-col;
 
       &__native {
-        @apply m-2 flex-1 resize-none overflow-hidden border-none
+        @apply overflow-hidden border-none
           focus:!outline-none active:!border-none active:!outline-none;
+
+        &--resizable {
+          @apply resize-y;
+        }
       }
     }
     .details {
-      @apply absolute bottom-0 mx-2 mb-2 flex items-center justify-start;
+      @apply flex items-center justify-start;
 
       &__counter {
         @apply flex items-center justify-center text-xs opacity-25;

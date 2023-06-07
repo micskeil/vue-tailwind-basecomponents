@@ -2,7 +2,6 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -23,13 +22,7 @@ export default defineConfig(({ command }) => {
   } else {
     // Build configuration
     return {
-      plugins: [
-        vue(),
-        dts({
-          outputDir: 'dist',
-          insertTypesEntry: true,
-        }),
-      ],
+      plugins: [vue()],
       resolve: {
         alias: {
           '@': fileURLToPath(new URL('./src', import.meta.url)),

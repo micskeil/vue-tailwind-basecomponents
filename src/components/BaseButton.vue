@@ -36,16 +36,13 @@
   </button>
 </template>
 
-<script lang="ts">
-  // use normal <script> to declare options and let native element inherit attrs
-  export default {
-    inheritAttrs: false,
-  };
-</script>
-
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import type { PropType } from 'vue';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     /**
@@ -118,7 +115,7 @@
 <style lang="postcss" scoped>
   .button {
     @apply relative flex w-fit cursor-pointer flex-row items-center justify-around
-    bg-primary px-2 py-2 text-center
+      bg-primary px-2 py-2 text-center
       transition-colors duration-300 ease-in-out;
 
     &:hover {
