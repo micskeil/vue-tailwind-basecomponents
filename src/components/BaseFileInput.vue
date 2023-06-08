@@ -1,61 +1,123 @@
 <template>
-  <input type="file" class="hidden" @change="handleChange" />
-  <div class="file-upload">
-    <div class="file-upload__input">
-      <div class="icon">
-        <BaseIcon name="upload" />
-      </div>
-      <BaseButton label="Upload a file" /><span>or drag and drop</span>
+  <input
+    ref="inputRef"
+    type="file"
+    class="hidden"
+    :disabled="disabled ? true : undefined"
+    :accept="acceptableFileTypes"
+    @change="handleChange"
+  />
+  <div class="file-upload" @click="handleClick">
+    <div class="file-upload__content">
+      <slot />
     </div>
-    <div class="file-upload__file-types">
-      <span>Allowed file formats: </span>
-      <span v-for="fileType in fileTypes" :key="fileType">
-        {{ fileType }}
-      </span>
+
+    <div
+      class="file-upload__input"
+      :class="{
+        'file-upload__input--overlay': $slots.default,
+      }"
+    >
+      <BaseIcon icon="upload" class="opacity-20" />
+      <div class="flex flex-row items-center justify-center gap-2">
+        Click here or drag and drop a file to add.
+      </div>
+      <div class="input__file-types">
+        Allowed file formats:
+        <span v-for="(fileType, i) in fileTypes" :key="fileType">
+          {{ i ? ',&nbsp;' : '&nbsp;' }}{{ fileType }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import BaseButton from '@/components/BaseButton.vue';
+  import BaseIcon from './BaseIcon.vue';
   import type { PropType } from 'vue';
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
 
-  defineOptions({
-    components: {
-      BaseButton: BaseButton as typeof BaseButton,
+  type FileTypes = 'image' | 'video' | 'audio' | 'pdf' | 'text' | 'zip' | 'other';
+
+  const props = defineProps({
+    fileTypes: {
+      type: [Array, String] as PropType<string[] | FileTypes>,
+      default: () => [],
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   });
 
-  defineProps({
-    fileTypes: {
-      type: Array as PropType<string[]>,
-      default: () => [],
-    },
+  const acceptableFileTypes = computed(() => {
+    if (typeof props.fileTypes === 'string') {
+      switch (props.fileTypes) {
+        case 'image':
+          return 'video/*';
+        case 'video':
+          return 'video/*';
+        case 'audio':
+          return 'audio/*';
+        case 'pdf':
+          return '.pdf';
+        case 'text':
+          return '.txt,.md';
+        case 'zip':
+          return '.zip,.rar,.7z';
+        default:
+          return '';
+      }
+    }
+    return props.fileTypes.map((t) => `.${t}`).join(',');
   });
 
   const emit = defineEmits({
     change: (v) => typeof v === 'string',
   });
 
-  const value = ref('');
+  const inputRef = ref<HTMLInputElement | null>(null);
 
-  const handleChange = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const file = target.files?.[0];
-    if (file) {
-      value.value = file.name;
-      emit('change', file.name);
+  const handleClick = () => {
+    inputRef.value?.click();
+  };
+
+  const handleChange = async (event: Event): Promise<void> => {
+    if (props.disabled) {
+      return;
     }
+
+    const files = (event.target as HTMLInputElement).files;
+    if (!files) {
+      return;
+    }
+    const filesArray = Array.from(files);
+    if (!filesArray.length) {
+      return;
+    }
+
+    emit('change', filesArray);
   };
 </script>
 
 <style lang="postcss" scoped>
   .file-upload {
-    @apply flex flex-col items-center justify-center gap-4 rounded-lg border border-dashed border-gray-300 p-4;
+    @apply relative flex cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden;
+
+    &__content {
+      @apply flex h-full w-full flex-col items-center justify-center gap-2;
+    }
 
     &__input {
-      @apply flex flex-col items-center justify-center gap-2;
+      @apply mx-1 flex flex-col items-center justify-center gap-2 text-center;
+
+      .input__file-types {
+        @apply text-center text-xs text-gray-500;
+      }
+
+      &--overlay {
+        @apply absolute;
+      }
     }
   }
 </style>

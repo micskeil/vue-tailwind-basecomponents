@@ -1,4 +1,4 @@
-import { BaseTextarea, BaseFileInput, BaseButton, BaseCode, BaseIcon } from '../index';
+import { BaseTextarea, BaseFileInput, BaseButton, BaseCode, BaseIcon } from './index';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
