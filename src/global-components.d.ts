@@ -1,12 +1,18 @@
-import { BaseTextarea, BaseFileInput, BaseButton, BaseCode, BaseIcon } from './index';
+import {
+  VBaseTextarea,
+  VBaseFileInput,
+  VBaseButton,
+  VBaseCode,
+  VBaseIcon,
+} from './index';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BaseButton: typeof BaseButton;
-    BaseCode: typeof BaseCode;
-    BaseIcon: typeof BaseIcon;
-    BaseTextarea: typeof BaseTextarea;
-    BaseFileInput: typeof BaseFileInput;
+    VBaseButton: typeof VBaseButton;
+    VBaseCode: typeof VBaseCode;
+    VBaseIcon: typeof VBaseIcon;
+    VBaseTextarea: typeof VBaseTextarea;
+    VBaseFileInput: typeof VBaseFileInput;
   }
 }
 export {};

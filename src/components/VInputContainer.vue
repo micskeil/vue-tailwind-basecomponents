@@ -1,5 +1,5 @@
 <template>
-  <div class="input-container" :class="`${elementType}-container`">
+  <div class="vb-input-container" :class="`vb-${elementType}-container`">
     <slot />
   </div>
 </template>
@@ -12,7 +12,7 @@
 </script>
 
 <style lang="postcss" scoped>
-  .container {
+  .vb-input-container {
     @apply flex items-center justify-start border-2;
 
     &:has(.error) {

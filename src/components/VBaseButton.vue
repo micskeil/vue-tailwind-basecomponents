@@ -1,43 +1,42 @@
 <template>
   <button
-    v-bind="$attrs"
-    ref="buttonRef"
-    role="button"
-    class="button"
+    class="vb-button"
     :class="{
-      [`button--${variant}`]: variant,
-      'button--link': isLink,
+      [`vb-button--${appearance}`]: appearance,
+      'vb-button--link': isLink,
+      'vb-button--loading': isLoading,
     }"
     :route="route ? route : null"
     :ext-link="extLink ? extLink : null"
     :type="isLink ? undefined : type"
-    :aria-label="label || 'button'"
-    tabindex="0"
-    :disabled="disabled || loading ? true : undefined"
+    :aria-label="label"
+    :disabled="disabled || isLoading ? true : undefined"
+    v-bind="$attrs"
   >
-    <div class="button--loading">
-      <slot v-if="loading" name="loading" class="button--loading">
-        <BaseIcon icon="loading" />
+    <div v-if="isLoading" class="vb-button--loading">
+      <slot name="loading" class="button--loading">
+        <VBaseIcon icon="loading" />
       </slot>
     </div>
     <div
-      class="button__content"
+      class="vb-button__content"
       :class="{
-        'button__content--loading': loading,
+        'vb-button__content--loading': isLoading,
       }"
     >
-      <slot name="prepend" class="button__prepend" />
+      <slot name="prepend" class="vb-button__prepend" />
       <span v-if="icon" class="button__icon">
-        <BaseIcon :icon="icon" />
+        <VBaseIcon :icon="icon" />
       </span>
-      <span v-else class="button__label">{{ label }}</span>
-      <slot name="append" class="button__append" />
+      <span v-else class="vb-button__label">{{ label }}</span>
+      <slot name="append" class="vb-button__append" />
     </div>
   </button>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import VBaseIcon from './VBaseIcon.vue';
+  import { computed } from 'vue';
   import type { PropType } from 'vue';
 
   defineOptions({
@@ -81,10 +80,10 @@
       default: undefined,
     },
     /**
-     * The variant of the button can be used to style the component.
-     * target class is button--${variant}
+     * The appearance of the button can be used to style the component.
+     * target class is button--${appearance}
      */
-    variant: {
+    appearance: {
       type: String,
       default: undefined,
     },
@@ -92,7 +91,7 @@
      * Whether or not the button is loading.
      * If true, the button will be disabled and the label will be replaced with a loading spinner.
      */
-    loading: {
+    isLoading: {
       type: Boolean,
       default: false,
     },
@@ -105,41 +104,17 @@
     },
   });
 
-  const buttonRef = ref<HTMLButtonElement | null>(null);
-
   const isLink = computed(() => {
     return props.route || props.extLink;
   });
 </script>
 
 <style lang="postcss" scoped>
-  .button {
-    @apply relative flex w-fit cursor-pointer flex-row items-center justify-around
-      bg-primary px-2 py-2 text-center
-      transition-colors duration-300 ease-in-out;
+  .vb-button {
+    @apply relative flex cursor-pointer items-center justify-around;
 
-    &:hover {
-      @apply opacity-95;
-    }
-
-    &:active {
-      @apply bg-primary;
-    }
-
-    &:disabled {
-      @apply cursor-not-allowed bg-gray-300;
-    }
-
-    &:deep(.icon__native) {
-      @apply !fill-white;
-    }
-
-    &__label {
-      @apply mx-auto pb-[2px] leading-4 text-white;
-    }
-
-    &__icon {
-      @apply mx-auto pb-[2px] leading-4 text-white;
+    &__content {
+      @apply flex flex-row items-center justify-center gap-2;
     }
 
     &__prepend {
@@ -149,14 +124,39 @@
     &__append {
       @apply ml-2 flex flex-row items-center justify-center;
     }
-    .button--loading {
+
+    &__label {
+      @apply mx-auto pb-[2px] leading-4;
+    }
+
+    &__icon {
+      @apply mx-auto pb-[2px] leading-4;
+    }
+
+    &:hover {
+      @apply opacity-90;
+    }
+
+    &:active:not(:disabled) {
+      @apply scale-[98%];
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed bg-gray-200;
+    }
+
+    &:deep(.vb-icon__native) {
+      @apply fill-white;
+    }
+
+    .vb-button--loading {
       @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
       :deep(.icon) {
         @apply animate-spin;
       }
     }
 
-    .button__content--loading {
+    .vb-button__content--loading {
       @apply opacity-0;
     }
   }

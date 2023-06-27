@@ -1,13 +1,15 @@
 <template>
-  <input
-    ref="inputRef"
-    type="file"
-    class="hidden"
-    :disabled="disabled ? true : undefined"
-    :accept="acceptableFileTypes"
-    @change="handleChange"
-  />
   <div class="file-upload" @click="handleClick">
+    <input
+      ref="inputRef"
+      type="file"
+      class="hidden"
+      label="file-upload"
+      aria-label="file-upload"
+      :disabled="disabled ? true : undefined"
+      :accept="acceptableFileTypes"
+      @change="handleChange"
+    />
     <div class="file-upload__content">
       <slot />
     </div>
@@ -18,22 +20,17 @@
         'file-upload__input--overlay': $slots.default,
       }"
     >
-      <BaseIcon icon="upload" class="opacity-20" />
+      <VBaseIcon icon="upload" class="opacity-20" />
       <div class="flex flex-row items-center justify-center gap-2">
         Click here or drag and drop a file to add.
       </div>
-      <div class="input__file-types">
-        Allowed file formats:
-        <span v-for="(fileType, i) in fileTypes" :key="fileType">
-          {{ i ? ',&nbsp;' : '&nbsp;' }}{{ fileType }}
-        </span>
-      </div>
+      <div class="input__file-types">Allowed file formats: {{ acceptableFileTypes }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import BaseIcon from './BaseIcon.vue';
+  import VBaseIcon from './VBaseIcon.vue';
   import type { PropType } from 'vue';
   import { computed, ref } from 'vue';
 
@@ -51,10 +48,11 @@
   });
 
   const acceptableFileTypes = computed(() => {
+    console.log(typeof props.fileTypes === 'string');
     if (typeof props.fileTypes === 'string') {
       switch (props.fileTypes) {
         case 'image':
-          return 'video/*';
+          return 'image/*';
         case 'video':
           return 'video/*';
         case 'audio':
