@@ -1,23 +1,24 @@
 <template>
-  <InputContainer element-type="code">
-    <div class="code-tools">
+  <VInputContainer element-type="code">
+    <div class="vb-code-tools">
       <div class="copy">
         <span v-if="copied" class="copy__confirmation">Copied!</span>
-        <BaseIcon class="copy__icon" icon="content-copy" :size="16" @click="copyCode" />
+        <VBaseIcon class="copy__icon" icon="content-copy" :size="16" @click="copyCode" />
       </div>
     </div>
-    <pre class="code">
+    <pre class="vb-code">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <code :class="`language-${language}`" v-html="html" />
     </pre>
     <div class="code-language">
       {{ language }}
     </div>
-  </InputContainer>
+  </VInputContainer>
 </template>
 
 <script setup lang="ts">
-  import InputContainer from './InputContainer.vue';
+  import VBaseIcon from './VBaseIcon.vue';
+  import VInputContainer from './VInputContainer.vue';
   import * as Prism from 'prismjs';
   import 'prismjs/themes/prism-tomorrow.css';
   import { ref } from 'vue';

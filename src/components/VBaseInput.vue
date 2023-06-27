@@ -1,7 +1,7 @@
 <template>
-  <InputContainer element-type="input" :class="{ 'full-width': block }">
-    <div class="input">
-      <div class="input__prepend">
+  <VInputContainer element-type="input" :class="{ 'full-width': block }">
+    <div class="vb-input">
+      <div class="vb-input__prepend">
         <slot name="prepend" />
       </div>
       <input
@@ -9,16 +9,16 @@
         v-model="value"
         type="text"
         placeholder="Your text goes here..."
-        class="input__native"
+        class="vb-input__native"
         :class="{
-          'input__native--error': hasError,
+          'vb-input__native--error': hasError,
           focused: isFocused,
           error: hasError,
         }"
         @focus="handleFocus"
         @blur="handleBlur"
       />
-      <div class="input__append">
+      <div class="vb-input__append">
         <slot name="append" />
       </div>
     </div>
@@ -27,11 +27,11 @@
         {{ message }}
       </div>
     </div>
-  </InputContainer>
+  </VInputContainer>
 </template>
 
 <script setup lang="ts">
-  import InputContainer from './InputContainer.vue';
+  import VInputContainer from './VInputContainer.vue';
   import { computed, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
@@ -165,7 +165,7 @@
 </script>
 
 <style lang="postcss" scoped>
-  .input {
+  .vb-input {
     @apply flex items-center;
   }
 </style>

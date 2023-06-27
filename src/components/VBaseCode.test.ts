@@ -1,5 +1,5 @@
-import BaseCode from './BaseCode.vue';
-import BaseIcon from './BaseIcon.vue';
+import VBaseCode from './VBaseCode.vue';
+import VBaseIcon from './VBaseIcon.vue';
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi } from 'vitest';
 
@@ -12,14 +12,14 @@ Object.defineProperty(window.navigator, 'clipboard', { value: clipboard });
 
 describe('CodeHighlighter', () => {
   it('renders the given code with proper syntax highlighting', () => {
-    const wrapper = mount(BaseCode, {
+    const wrapper = mount(VBaseCode, {
       propsData: {
         code: 'console.log("Hello World!");',
         language: 'javascript',
       },
       global: {
         components: {
-          BaseIcon,
+          VBaseIcon,
         },
       },
     });
@@ -28,19 +28,19 @@ describe('CodeHighlighter', () => {
   });
 
   it('copies the code when copy icon is clicked', async () => {
-    const wrapper = mount(BaseCode, {
+    const wrapper = mount(VBaseCode, {
       propsData: {
         code: 'console.log("Hello World!");',
         language: 'javascript',
       },
       global: {
         components: {
-          BaseIcon,
+          VBaseIcon,
         },
       },
     });
 
-    const copyIcon = wrapper.findComponent({ name: 'BaseIcon' });
+    const copyIcon = wrapper.findComponent({ name: 'VBaseIcon' });
     await copyIcon.trigger('click');
 
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(

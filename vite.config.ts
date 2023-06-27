@@ -9,7 +9,13 @@ export default defineConfig(({ command }) => {
   if (command === 'serve') {
     // Development configuration
     return {
-      plugins: [vue()],
+      plugins: [
+        vue({
+          script: {
+            defineModel: true,
+          },
+        }),
+      ],
       root: 'src/example/',
       resolve: {
         alias: {
@@ -24,7 +30,11 @@ export default defineConfig(({ command }) => {
     // Build configuration
     return {
       plugins: [
-        vue(),
+        vue({
+          script: {
+            defineModel: true,
+          },
+        }),
         dts({
           outputDir: 'dist',
           insertTypesEntry: true,

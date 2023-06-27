@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CodeHighlighter > renders the given code with proper syntax highlighting 1`] = `
+"<div data-v-3441152e=\\"\\" data-v-d41bccca=\\"\\" class=\\"vb-input-container vb-code-container\\">
+  <div data-v-d41bccca=\\"\\" class=\\"vb-code-tools\\">
+    <div data-v-d41bccca=\\"\\" class=\\"copy\\">
+      <!--v-if--><span data-v-d41bccca=\\"\\" class=\\"vb-icon copy__icon\\" role=\\"img\\"><svg class=\\"vb-icon__native fill-primary vb-icon-content-copy\\" viewBox=\\"0 0 24 24\\" width=\\"16\\"><path d=\\"M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z\\"></path></svg></span>
+    </div>
+  </div><pre data-v-d41bccca=\\"\\" class=\\"vb-code\\">      <!-- eslint-disable-next-line vue/no-v-html -->
+      <code data-v-d41bccca=\\"\\" class=\\"language-javascript\\">console<span class=\\"token punctuation\\">.</span><span class=\\"token function\\">log</span><span class=\\"token punctuation\\">(</span><span class=\\"token string\\">\\"Hello World!\\"</span><span class=\\"token punctuation\\">)</span><span class=\\"token punctuation\\">;</span></code>
+    </pre>
+  <div data-v-d41bccca=\\"\\" class=\\"code-language\\">javascript</div>
+</div>"
+`;

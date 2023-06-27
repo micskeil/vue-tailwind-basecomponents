@@ -1,15 +1,19 @@
 // import the global css file
+import VBaseButton from './components/VBaseButton.vue';
+import VBaseCode from './components/VBaseCode.vue';
+import VBaseDialog from './components/VBaseDialog.vue';
+import VBaseFileInput from './components/VBaseFileInput.vue';
+import VBaseIcon from './components/VBaseIcon.vue';
+import VBaseTabs from './components/VBaseTabs.vue';
+import VBaseTextarea from './components/VBaseTextarea.vue';
 import '@/assets/main.css';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseCode from '@/components/BaseCode.vue';
-import BaseFileInput from '@/components/BaseFileInput.vue';
-import BaseIcon from '@/components/BaseIcon.vue';
-import BaseTextarea from '@/components/BaseTextarea.vue';
 
-export default {
-  BaseTextarea,
-  BaseIcon,
-  BaseButton,
-  BaseCode,
-  BaseFileInput,
+export {
+  VBaseButton,
+  VBaseCode,
+  VBaseFileInput,
+  VBaseIcon,
+  VBaseTextarea,
+  VBaseDialog,
+  VBaseTabs,
 };

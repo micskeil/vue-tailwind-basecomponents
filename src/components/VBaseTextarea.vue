@@ -1,16 +1,16 @@
 <template>
-  <InputContainer element-type="textarea">
-    <div class="textarea">
+  <VInputContainer element-type="textarea">
+    <div class="b-textarea">
       <textarea
         ref="textareaRef"
         v-model="value"
         placeholder="Your text goes here..."
-        class="textarea__native"
+        class="b-textarea__native"
         :class="{
-          'textbox__native--error': hasError,
+          'b-textarea__native--error': hasError,
           focused: isFocused,
           error: hasError,
-          'textbox__native--resizable': !noResize,
+          'b-textarea__native--resizable': !noResize,
         }"
         v-bind="$attrs"
         spellcheck
@@ -32,11 +32,11 @@
         </div>
       </div>
     </div>
-  </InputContainer>
+  </VInputContainer>
 </template>
 
 <script setup lang="ts">
-  import InputContainer from './InputContainer.vue';
+  import VInputContainer from './VInputContainer.vue';
   import { ref, computed, watch, onMounted } from 'vue';
 
   defineOptions({
@@ -155,9 +155,9 @@
 </script>
 
 <style lang="postcss" scoped>
-  .textarea-container {
+  .vb-textarea-container {
     @apply flex p-2 md:p-4;
-    .textarea {
+    .vb-textarea {
       @apply relative flex h-full flex-1 flex-col;
 
       &__native {

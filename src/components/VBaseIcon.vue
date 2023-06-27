@@ -1,16 +1,16 @@
 <template>
   <span
     :title="label"
-    class="icon"
+    class="vb-icon"
     role="img"
     :aria-label="label"
     :aria-labelledby="parentId"
   >
     <svg
-      class="icon__native"
+      class="vb-icon__native"
       viewBox="0 0 24 24"
       :width="width"
-      :class="[`fill-${color}`, `icon-${icon}`]"
+      :class="[`fill-${color}`, `vb-icon-${icon}`]"
     >
       <path :d="path" />
     </svg>
@@ -30,6 +30,7 @@
   const props = defineProps({
     label: {
       type: String,
+      required: false,
       default: undefined,
     },
     icon: {
@@ -45,7 +46,8 @@
       default: 24,
     },
     parentId: {
-      type: [String],
+      type: String,
+      required: false,
       default: undefined,
     },
   });
@@ -97,7 +99,7 @@
 </script>
 
 <style>
-  .icon {
+  .vb-icon {
     @apply flex w-fit items-center justify-center;
   }
 </style>
