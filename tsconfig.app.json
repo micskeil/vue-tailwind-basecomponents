@@ -4,6 +4,11 @@
  ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
+   // workaround for https://github.com/vuejs/tsconfig/issues/6
+   "preserveValueImports": false,
+   "importsNotUsedAsValues": "remove",
+   "verbatimModuleSyntax": true,
+   // end workaround
     "composite": true,
     "baseUrl": ".",
     "paths": {
