@@ -28,14 +28,14 @@
   const mdiIcons: MdiIcons = mdi;
 
   const props = defineProps({
-    label: {
-      type: String,
-      required: false,
-      default: undefined,
-    },
     icon: {
       type: String,
       required: true,
+    },
+    label: {
+      type: String,
+
+      default: undefined,
     },
     color: {
       type: String,
@@ -47,7 +47,6 @@
     },
     parentId: {
       type: String,
-      required: false,
       default: undefined,
     },
   });
