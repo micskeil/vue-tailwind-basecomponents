@@ -2,7 +2,6 @@
   <dialog
     v-if="modelValue"
     ref="dialogRef"
-    data-modal
     class="vb-dialog"
     :class="{ [`vb-dialog--${appearance}`]: appearance }"
     @close="modelValue = false"

@@ -7,13 +7,14 @@
       <input
         ref="inputRef"
         v-model="value"
-        type="text"
-        placeholder="Your text goes here..."
+        v-bind="$attrs"
+        :type="$attrs.type as string || 'text'"
+        :placeholder="$attrs.placeholder as string || 'Type here...'"
+        :autofocus="autofocus"
         class="vb-input__native"
         :class="{
           'vb-input__native--error': hasError,
-          focused: isFocused,
-          error: hasError,
+          'vb-input__native--focused': isFocused,
         }"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -32,15 +33,23 @@
 
 <script setup lang="ts">
   import VInputContainer from './VInputContainer.vue';
-  import { computed, ref, watchEffect } from 'vue';
+  import { eagerComputed } from '@vueuse/core';
+  import { computed, defineComponent, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
   type inputRule = (value: string) => boolean | string;
+
+  // The native input element inherits all attributes from parent component,
+  // like placeholder, type, etc.
+  defineComponent({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     /**
      * The value of the input.
      * This is a two-way binding.
+     * INFO: Do not use defineModel() here, because we need extra logic in the computed.
      */
     modelValue: {
       type: String,
@@ -63,30 +72,22 @@
       type: String as PropType<'blur' | 'change'>,
       default: 'blur',
     },
-    /**
-     * To hide the details section with v-if.
-     */
+    /** To hide the details section with v-if. */
     hideDetails: {
       type: Boolean,
       default: false,
     },
-    /**
-     * The messages to display in the details section.
-     */
+    /** The messages to display in the details section. */
     messages: {
       type: Array as PropType<string[]>,
       default: () => [],
     },
-    /**
-     * Whether the input should autofocus.
-     */
+    /** Whether the input should autofocus. */
     autofocus: {
       type: Boolean,
       default: false,
     },
-    /**
-     * Whether the input should be full width, so block.
-     */
+    /** Whether the input should be full width, so block. */
     block: {
       type: Boolean,
       default: false,
@@ -122,12 +123,17 @@
     return messages;
   });
 
-  const allMessages = computed(() => [...props.messages, ...errorMessages.value]);
+  // eagerComputed() is used here, because we need to update the computed ASAP not to wait one tick.
+  const allMessages = eagerComputed(() => [...props.messages, ...errorMessages.value]);
 
   /**
    * Reactive variable to check if the input has an error.
    */
-  const hasError = computed(validate);
+  const hasError = computed(() => {
+    return props.validateOn === 'change'
+      ? isChangeHappened.value && validate() === false
+      : isBlurHappened.value && validate() === false;
+  });
 
   /**
    * Exposed function to validate the input according to the rules prop.
@@ -141,6 +147,7 @@
         ? (isBlurHappened.value = true)
         : (isChangeHappened.value = true);
     }
+
     return props.rules.every((rule) => rule(value.value) === true);
   }
   defineExpose({ validate });
@@ -150,7 +157,6 @@
     isFocused.value = true;
   };
   const handleBlur = () => {
-    isFocused.value = false;
     isBlurHappened.value = true;
   };
 
@@ -158,8 +164,8 @@
    * Focus the input if props.autofocus is true.
    */
   watchEffect(() => {
-    if (props.autofocus) {
-      inputRef.value?.focus();
+    if (props.autofocus && inputRef.value) {
+      inputRef.value.focus();
     }
   });
 </script>
