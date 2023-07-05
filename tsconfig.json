@@ -1,7 +1,7 @@
 {
   "files": [],
   "compilerOptions": {
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "outDir": "./dist",
   },
   "references": [

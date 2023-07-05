@@ -5,7 +5,7 @@
     // workaround for https://github.com/vuejs/tsconfig/issues/6
     "preserveValueImports": false,
     "importsNotUsedAsValues": "remove",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     // end workaround
     "composite": true,
     "types": ["node"]
