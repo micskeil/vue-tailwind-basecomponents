@@ -30,7 +30,7 @@
     "build:watch": "run-p delete-build type-check build-only-watch",
     "delete-build": "rimraf dist",
     "preview": "vite preview",
-    "test": "vitest",
+    "test:unit": "vitest",
     "test:ui": "vitest --ui",
     "test:html": "vite preview --outDir ../../coverage",
     "build-only": "vite build",
