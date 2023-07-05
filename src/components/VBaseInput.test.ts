@@ -75,7 +75,7 @@ describe('VBaseInput', () => {
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['test']);
   });
 
-  it.only('validates the input according to the rules prop', async () => {
+  it('validates the input according to the rules prop', async () => {
     const wrapper = createWrapper();
 
     await wrapper.find('.vb-input__native').setValue('');
