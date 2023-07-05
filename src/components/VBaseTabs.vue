@@ -24,7 +24,7 @@
   import VBaseButton from './VBaseButton.vue';
   import type { PropType } from 'vue';
 
-  type Tab = {
+  export type Tab = {
     id: string;
     label: string;
     prependIcon?: string;

@@ -1,16 +1,15 @@
 <template>
   <VInputContainer element-type="textarea">
-    <div class="b-textarea">
+    <div class="vb-textarea">
       <textarea
         ref="textareaRef"
         v-model="value"
-        placeholder="Your text goes here..."
-        class="b-textarea__native"
+        :placeholder="$attrs.placeholder as string || 'Type here...'"
+        class="vb-textarea__native"
         :class="{
-          'b-textarea__native--error': hasError,
-          focused: isFocused,
-          error: hasError,
-          'b-textarea__native--resizable': !noResize,
+          'vb-textarea__native--error': hasError,
+          'vb-textarea__native--focused': isFocused,
+          'vb-textarea__native--resizable': !noResize,
         }"
         v-bind="$attrs"
         spellcheck
@@ -125,9 +124,10 @@
     }
     // If the user is pressing shift + enter, we will not send the message.
     // This is to allow the user to create a new line.
-    if (event.shiftKey || event.key !== 'Enter') {
+    if (event.shiftKey || event.key !== 'enter') {
       return;
     }
+
     event.preventDefault();
     event.stopPropagation();
     if (
@@ -140,11 +140,11 @@
   };
 
   const textareaRef = ref<HTMLTextAreaElement | null>(null);
+
   // Change text area height when typing
   onMounted(() => {
     if (props.autoGrow) {
       watch(value, () => {
-        console.log('value changed');
         textareaRef.value?.style.setProperty(
           'height',
           textareaRef.value?.scrollHeight + 'px'

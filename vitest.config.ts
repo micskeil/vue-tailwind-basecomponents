@@ -22,10 +22,10 @@ export default mergeConfig(
       outputFile: './coverage/index.html',
       coverage: {
         enabled: true,
-        lines: 80,
-        statements: 80,
-        functions: 60,
-        branches: 60,
+        lines: 90,
+        statements: 90,
+        functions: 70,
+        branches: 70,
       },
     },
     resolve: {
