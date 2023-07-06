@@ -1,8 +1,13 @@
 # vue-tailwind-basecomponents
 
-This template should help get you started developing with Vue 3 in Vite.
+A Functional Vue Component Library with Personalization in Mind.
 
-## Recommended IDE Setup
+We prioritize functionality over design. Our goal is to provide developers with a range of components that can be easily customized to fit any Vue project. By focusing on layout styling and minimal design choices, users have the flexibility to personalize each component according to their preferences and seamlessly integrate them into their Vue applications.
+
+You can enjoy a vast collection of thoughtfully crafted components, from essential elements to interactive widgets. We understand that every Vue project is unique, and our library aims to empower developers to build exceptional user experiences by offering powerful and customizable functionality.
+
+
+## You want to contribute?
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
