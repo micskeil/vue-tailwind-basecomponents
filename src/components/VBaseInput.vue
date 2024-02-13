@@ -3,15 +3,14 @@
     element-type="input"
     :class="{ 'full-width': block, focused: isFocused }"
   >
-    <label :for="inputId" class="vb-input__label">
-      <slot name="label" />
+    <label v-if="label" :for="inputRef?.id" class="vb-input__label">
+      {{ label }}
     </label>
     <div class="vb-input" :class="{ focused: isFocused }">
       <div class="vb-input__prepend">
         <slot name="prepend" />
       </div>
       <input
-        :id="inputId"
         ref="inputRef"
         v-model="value"
         v-bind="$attrs"
@@ -38,7 +37,6 @@
 <script setup lang="ts">
   import VInputContainer from './VInputContainer.vue';
   import { eagerComputed } from '@vueuse/core';
-  import ShortUniqueId from 'short-unique-id';
   import { computed, defineComponent, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
@@ -61,10 +59,9 @@
       required: true,
     },
     /**
-     * The id of the input.
-     * If not provided, a random id will be generated.
+     * The label of the input.
      */
-    id: {
+    label: {
       type: String,
       default: '',
     },
@@ -108,10 +105,6 @@
   });
 
   const inputRef = ref<HTMLInputElement | null>(null);
-
-  const inputId = computed(
-    () => props.id || new ShortUniqueId({ length: 10 }).randomUUID()
-  );
 
   const isBlurHappened = ref(false);
   const isChangeHappened = ref(false);
@@ -167,6 +160,8 @@
 
     return props.rules.every((rule) => rule(value.value) === true);
   }
+
+  // Expose the validate function to be used directly outside the component.
   defineExpose({ validate });
 
   const isFocused = ref(false);
