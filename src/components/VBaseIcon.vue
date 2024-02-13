@@ -22,9 +22,10 @@
   import * as mdi from '@mdi/js';
   import { computed } from 'vue';
 
-  interface MdiIcons {
+  type MdiIcons = {
     [key: string]: string;
-  }
+  };
+
   const mdiIcons: MdiIcons = mdi;
 
   const props = defineProps({

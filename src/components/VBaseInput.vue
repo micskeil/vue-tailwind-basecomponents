@@ -1,16 +1,20 @@
 <template>
-  <VInputContainer element-type="input" :class="{ 'full-width': block }">
-    <div class="vb-input">
+  <VInputContainer
+    element-type="input"
+    :class="{ 'full-width': block, focused: isFocused }"
+  >
+    <label :for="inputId" class="vb-input__label">
+      <slot name="label" />
+    </label>
+    <div class="vb-input" :class="{ focused: isFocused }">
       <div class="vb-input__prepend">
         <slot name="prepend" />
       </div>
       <input
+        :id="inputId"
         ref="inputRef"
         v-model="value"
         v-bind="$attrs"
-        :type="$attrs.type as string || 'text'"
-        :placeholder="$attrs.placeholder as string || 'Type here...'"
-        :autofocus="autofocus"
         class="vb-input__native"
         :class="{
           'vb-input__native--error': hasError,
@@ -34,6 +38,7 @@
 <script setup lang="ts">
   import VInputContainer from './VInputContainer.vue';
   import { eagerComputed } from '@vueuse/core';
+  import ShortUniqueId from 'short-unique-id';
   import { computed, defineComponent, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
@@ -54,6 +59,14 @@
     modelValue: {
       type: String,
       required: true,
+    },
+    /**
+     * The id of the input.
+     * If not provided, a random id will be generated.
+     */
+    id: {
+      type: String,
+      default: '',
     },
     /**
      * The rules to validate the input.
@@ -95,6 +108,10 @@
   });
 
   const inputRef = ref<HTMLInputElement | null>(null);
+
+  const inputId = computed(
+    () => props.id || new ShortUniqueId({ length: 10 }).randomUUID()
+  );
 
   const isBlurHappened = ref(false);
   const isChangeHappened = ref(false);
@@ -157,6 +174,7 @@
     isFocused.value = true;
   };
   const handleBlur = () => {
+    isFocused.value = false;
     isBlurHappened.value = true;
   };
 

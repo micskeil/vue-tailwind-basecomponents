@@ -4,13 +4,13 @@
       <textarea
         ref="textareaRef"
         v-model="value"
-        :placeholder="$attrs.placeholder as string || 'Type here...'"
         class="vb-textarea__native"
         :class="{
           'vb-textarea__native--error': hasError,
           'vb-textarea__native--focused': isFocused,
           'vb-textarea__native--resizable': !noResize,
         }"
+        :style="{ resize: noResize ? 'none' : 'vertical' }"
         v-bind="$attrs"
         spellcheck
         @keyup.enter="handleSend"
