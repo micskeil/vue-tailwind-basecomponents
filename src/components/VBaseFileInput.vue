@@ -1,30 +1,32 @@
 <template>
-  <div class="file-upload" @click="handleClick">
+  <div class="vb-file-upload" @click="handleClick">
     <input
       ref="inputRef"
       type="file"
-      class="hidden"
       label="file-upload"
+      v-bind="$attrs"
       aria-label="file-upload"
       :disabled="disabled ? true : undefined"
       :accept="acceptableFileTypes"
       @change="handleChange"
     />
-    <div class="file-upload__content">
+    <div v-if="$slots.default" class="vb-file-upload__content">
       <slot />
     </div>
 
     <div
-      class="file-upload__input"
+      class="vb-file-upload__input"
       :class="{
-        'file-upload__input--overlay': $slots.default,
+        'vb-file-upload__input--overlay': $slots.default,
       }"
     >
       <VBaseIcon icon="upload" class="opacity-20" />
       <div class="flex flex-row items-center justify-center gap-2">
         Click here or drag and drop a file to add.
       </div>
-      <div class="input__file-types">Allowed file formats: {{ acceptableFileTypes }}</div>
+      <div class="vb-input__file-types">
+        Allowed file formats: {{ acceptableFileTypes }}
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +34,11 @@
 <script setup lang="ts">
   import VBaseIcon from './VBaseIcon.vue';
   import type { PropType } from 'vue';
-  import { computed, ref } from 'vue';
+  import { computed, ref, defineComponent } from 'vue';
+
+  defineComponent({
+    inheritAttrs: false,
+  });
 
   type FileTypes = 'image' | 'video' | 'audio' | 'pdf' | 'text' | 'zip' | 'other';
 
@@ -48,7 +54,6 @@
   });
 
   const acceptableFileTypes = computed(() => {
-    console.log(typeof props.fileTypes === 'string');
     if (typeof props.fileTypes === 'string') {
       switch (props.fileTypes) {
         case 'image':
@@ -99,8 +104,12 @@
 </script>
 
 <style lang="postcss" scoped>
-  .file-upload {
+  .vb-file-upload {
     @apply relative flex cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden;
+
+    input {
+      @apply hidden;
+    }
 
     &__content {
       @apply flex h-full w-full flex-col items-center justify-center gap-2;

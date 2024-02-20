@@ -40,7 +40,7 @@
   import { computed, defineComponent, ref, watchEffect } from 'vue';
   import type { PropType } from 'vue';
 
-  type inputRule = (value: string) => boolean | string;
+  type inputRule = (value: string | number) => boolean | string;
 
   // The native input element inherits all attributes from parent component,
   // like placeholder, type, etc.
@@ -55,7 +55,7 @@
      * INFO: Do not use defineModel() here, because we need extra logic in the computed.
      */
     modelValue: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
     /**
@@ -109,7 +109,7 @@
   const isBlurHappened = ref(false);
   const isChangeHappened = ref(false);
 
-  const emit = defineEmits({ 'update:modelValue': (_v: string) => true });
+  const emit = defineEmits({ 'update:modelValue': (_v: string | number) => true });
 
   const value = computed({
     get: () => props.modelValue,
@@ -121,6 +121,12 @@
 
   const errorMessages = computed((): Array<string> => {
     const messages = [] as Array<string>;
+    if (props.validateOn === 'change' && isChangeHappened.value === false) {
+      return messages;
+    }
+    if (props.validateOn === 'blur' && isBlurHappened.value === false) {
+      return messages;
+    }
     if (props.rules.length === 0) {
       return messages;
     }

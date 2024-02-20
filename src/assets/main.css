@@ -1,3 +1,5 @@
+// remove this imports to not to reimport tailwindcss in every file
+// and couse extra bundle size
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */

@@ -111,42 +111,10 @@
 
 <style lang="postcss" scoped>
   .vb-button {
-    @apply relative flex cursor-pointer items-center justify-around;
-
-    &__content {
-      @apply flex flex-row items-center justify-center gap-2;
-    }
-
-    &__prepend {
-      @apply mr-2 flex flex-row items-center justify-center;
-    }
-
-    &__append {
-      @apply ml-2 flex flex-row items-center justify-center;
-    }
-
-    &__label {
-      @apply mx-auto pb-[2px] leading-4;
-    }
-
-    &__icon {
-      @apply mx-auto pb-[2px] leading-4;
-    }
-
-    &:hover {
-      @apply opacity-90;
-    }
-
-    &:active:not(:disabled) {
-      @apply scale-[98%];
-    }
+    @apply relative cursor-pointer;
 
     &:disabled {
-      @apply cursor-not-allowed bg-gray-200;
-    }
-
-    &:deep(.vb-icon__native) {
-      @apply fill-white;
+      @apply cursor-not-allowed;
     }
 
     .vb-button--loading {
